@@ -1,0 +1,26 @@
+# group_vars/all.yml
+# Variables visible to all nodes
+---
+rhbase_repositories:
+    - epel-release
+rhbase_install_packages:
+    - bash-completion
+    - bind-utils
+    - git
+    - nano
+    - tree
+    - vim-enhanced
+    - wget
+
+rhbase_users:
+     - name: jens
+       comment: "Administrator"
+       groups:
+         - wheel
+       password: $6$kC.2uOIEhB7u9xtI$/2Y967iZGG/LsR.g/aUtb37lt2sMlaP2HLrV5kwlmzUuLfpeVREplvgeJQus8JU8IzDvsvC7NSiRvEd0LyWjc1
+
+rhbase_ssh_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDeD2VavNudHiRUQVMDO+fhrssLQ3qRHcpgoG2gkAYX0BUxzxkPdxwBy0oCGtHPWRYIc2g5tp7VyYdyKNC1EgDMTerxm/Fs/ksIKc2mJSoxIAwIMFhqdqmtx0XvNheCX1QGRM0Wx5fXD2Qnqx4hVVcmV+NY/5L9Pb/a2AqlSH4BXJt/Yd1tbY14kedQ36siLVk6vQ3U+x+pWFyGI3MAnicjW/nyIHb8VEDmJ+zDExut0ku2iMyYP/CwQf5ltEVlDxbNqrfGDQ5f33mJ215/lIPIh8W7AqdKwz2qARI73rFS7SYmI7GXhoAQt49/aFiGdapgls2qmkSjsnvTvd6/w2CB jensdufour@Lenovo'
+
+rhbase_ssh_user: jens
+
+rhbase_motd: true

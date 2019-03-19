@@ -1,0 +1,50 @@
+# site.yml
+---
+- hosts: pu004
+  become: true
+  roles:
+    - bertvv.rh-base
+    - bertvv.httpd
+    - bertvv.mariadb
+    - bertvv.wordpress
+  pre_tasks:
+    - name: Copy web server private key
+      copy:
+        src: files/pu004.key
+        dest: /etc/pki/tls/private/pu004.key
+    - name: Copy web server certificate
+      copy:
+        src: files/pu004.crt
+        dest: /etc/pki/tls/certs/pu004.crt
+- hosts: pu001,pu002
+  sudo: true
+  roles:
+    - bertvv.rh-base
+    - bertvv.bind
+- hosts: pr011
+  sudo: true
+  roles:
+    - bertvv.rh-base
+    - bertvv.samba
+    - bertvv.vsftpd
+  post_tasks:
+    - name: ACL share sales
+      acl:
+        path: /srv/shares/sales
+        entity: management
+        etype: group
+        permissions: rx
+        state: present
+    - name: ACL share it
+      acl:
+        path: /srv/shares/it
+        entity: management
+        etype: group
+        permissions: rx
+        state: present
+
+- hosts: pr001
+  sudo: true
+  roles:
+    - bertvv.rh-base
+    - bertvv.dhcp
